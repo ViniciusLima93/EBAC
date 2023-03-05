@@ -1,0 +1,18 @@
+    
+    
+    
+    #Algoritmo que descreva a viagem do homem.cabra, lobo e maço de alfafa
+
+    1.O homem leva a cabra para o outro lado do rio, deixando o lobo e o maço de alfafa para trás.
+
+    2. O homem volta para a margem original e leva o lobo para a outra margem, deixando o maço de alfafa para trás.
+
+    3. O homem retorna para a margem original com a cabra.
+
+    4. O homem deixa a cabra na margem original e pega o maço de alfafa.
+
+    5. O homem atravessa o rio com o maço de alfafa, deixando o lobo para trás.
+
+    6. O homem volta para a margem original e pega a cabra.
+
+    7. Finalmente, o homem atravessa o rio com a cabra, deixando o maço de alfafa para trás.
