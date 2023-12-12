@@ -151,7 +151,7 @@ function validaUF (elemento) {
         const ufValida = /^[A-Z]{2}$/;
 
         if(this.value.match(ufValida)) {
-            document.querySelector('mensagem').innerHTML = "";
+            document.querySelector('.mensagem').innerHTML = "";
             this.classList.remove('erro');
             this.parentNode.classList.remove('erro');
 

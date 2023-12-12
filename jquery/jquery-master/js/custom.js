@@ -60,6 +60,10 @@ $(document).ready(function(){
       'padding':'2px',
      })
 
+     $('.featured-item:nth(1)').hide(2000, function(){
+      alert($(this).find('h4').text() + 'esgotado !!!')
+     })
+
     
 
 
