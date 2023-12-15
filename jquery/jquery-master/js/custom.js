@@ -60,10 +60,21 @@ $(document).ready(function(){
       'padding':'2px',
      })
 
-     $('.featured-item:nth(1)').hide(2000, function(){
-      alert($(this).find('h4').text() + 'esgotado !!!')
+     $('body').on('focus', '#data', function(){
+         $(this).dialog()
      })
 
+     $('.nav-modal-open').on('click', function(e){
+        e.preventDefault();
+
+        let elem = $(this).attr('rel')
+
+        $('.modal-body').html($('#'+elem).html())
+
+        let myModal = new bootstrap.Modal(('#modalId'))
+
+        myModal.show()
+     })
     
 
 

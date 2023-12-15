@@ -161,10 +161,12 @@ a {
 	background-color: #1b1b18;
 }
 .featured-item {
+	
 	border-radius: 5px;
 	border: 1px solid #eee;
 	padding: 20px;
 	transition: all 0.5s;
+	height: 420px;
 }
 .featured-item:hover {
 	opacity: 0.9;
@@ -356,6 +358,8 @@ a {
 .featured .featured-item {
 	margin-bottom: 30px;
 	text-decoration: none;
+	
+
 }
 .featured .featured-item h4 {
 	transition: all 0.5s;
