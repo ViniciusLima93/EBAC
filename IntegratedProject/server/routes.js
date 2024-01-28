@@ -1,0 +1,19 @@
+const express = require('express');
+
+const routes = express.Router();
+
+const PropertiesController = require('./controllers/PropertiesController');
+
+
+routes.get('/', (request, response) => {
+    return response.json(
+        "Hello World"
+    )
+})
+
+routes.get('/properties', PropertiesController.read);
+routes.post('/properties', PropertiesController.create);
+routes.delete('/properties/:id', PropertiesController.delete);
+routes.patch('/properties/:id', PropertiesController.update);
+
+module.exports = routes
