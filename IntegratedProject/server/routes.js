@@ -14,6 +14,6 @@ routes.get('/', (request, response) => {
 routes.get('/properties', PropertiesController.read);
 routes.post('/properties', PropertiesController.create);
 routes.delete('/properties/:id', PropertiesController.delete);
-routes.patch('/properties/:id', PropertiesController.update);
+routes.put('/properties/:id', PropertiesController.update);
 
 module.exports = routes

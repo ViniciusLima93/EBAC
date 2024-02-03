@@ -26,23 +26,20 @@ module.exports = {
 
     },
     async update(request, response) {
-
         const {id} = request.params;
         const {type,description, title} = request.body;
-
+    
         const propertie = await Properties.findOne({_id: id})
-
-        if (!type || !description || !title) {
-            propertie.title = title ? title : propertie.title;
-            propertie.description = description ? description :propertie.description;
-            propertie.type = type ? type :propertie.type;
-            await propertie.save() 
-        }
-
+    
+        if (type !== undefined) propertie.type = type;
+        if (description !== undefined) propertie.description = description;
+        if (title !== undefined) propertie.title = title;
+    
+        await propertie.save() 
+    
         return response.json(propertie)
-
-
     },
+    
 
     async delete(request, response) {
         const {id} = request.params;
