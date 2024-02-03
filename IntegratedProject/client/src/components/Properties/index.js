@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component } from 'react'
 import axios from 'axios'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -21,7 +21,7 @@ const initialState = {
         title: '',
         description: ''
     },
-    properties: []
+    list: []
 }
 
 export default class Properties extends Component {
@@ -45,8 +45,9 @@ export default class Properties extends Component {
         axios[method](url, propertie)
             .then(response => {
                 // promisse
-                const list = this.getUpdatedList(response.data)
-                this.setState({ propertie: initialState.propertie, list })
+                const updateList = this.getUpdatedList(response.data);
+                console.log(updateList)
+                this.setState({ list: updateList, propertie: initialState.propertie})
             })
             .catch((error) => {
                 console.log(error)
@@ -54,42 +55,51 @@ export default class Properties extends Component {
 
     }
 
+
     /* Atualiza lista de imóveis */
-    getUpdatedList(propertie){
-        const list = this.state.list?.filter(p => p._id !== propertie._id)
-        if(propertie) list.unshift(propertie)
-        return list
+    getUpdatedList(propertie) {
+        let updatedList = [...this.state.list];
+        
+       
+        const index = updatedList.findIndex(p => p._id === propertie._id);
+        if (index !== -1) {
+            updatedList[index] = propertie;
+        } else {
+            
+            updatedList.unshift(propertie);
+        }
+    
+        return updatedList;
     }
 
-    /* Atualiza Imóvel */
-    update(event) {
+
+      /* Atualiza Imóvel */
+      update(event) {
         const propertie = { ...this.state.propertie }
         propertie[event.target.name] = event.target.value
         this.setState({ propertie })
     }
+    
+
 
     componentDidMount(){
-        axios.get(baseUrl)
-            .then(response => {
-                this.setState({ list: response.data })
-            })
-            .catch((error) => {
-                console.log(error)
-            })
+        this.loadProperties();
     }
 
-    /* Atualiza lista de imóveis */
-    // eslint-disable-next-line no-dupe-class-members
-    getUpdatedList(propertie){
-        console.log(propertie)
-        const list = this.state.list.filter(p => p._id !== propertie._id)
-        if(propertie) list.unshift(propertie)
-        return list
+    loadProperties ( ) {
+        axios.get(baseUrl)
+        .then(response => {
+            this.setState({ list: response.data })
+        })
+        .catch((error) => {
+            console.log(error)
+        })
     }
+       
 
     /* Lista Imóveis */
     mapProperties(properties){
-        return this.state.list?.map( response  => {
+        return properties?.map( response  => {
             return this.getListItem(response)
         })
     }
@@ -110,7 +120,7 @@ export default class Properties extends Component {
                     </ListItemAvatar>
                     <React.Fragment>
                         <Typography
-                            sx={{ display: 'inline' }}
+                            sx={{ display: 'inline', maxHeight: '600px' }}
                             component="span"
                             variant="body2"
                             color="text.primary"
@@ -148,8 +158,7 @@ export default class Properties extends Component {
         console.log(propertie)
         axios.delete(`${baseUrl}/${propertie._id }`)
             .then(response => {
-                // const list = this.state.list.filter( p => p._id !== propertie._id )
-                const list = this.getUpdatedList(null)
+                const list = this.state.list.filter( p => p._id !== propertie._id )
                 this.setState({ list })
             })
     }
@@ -161,7 +170,7 @@ export default class Properties extends Component {
           component="form"
           sx={{
             display: 'flex',
-            flexDirection: 'column',
+            maxHeight: '500px',
             alignItems: 'center',
             justifyContent: 'center',
             padding: '20px',
